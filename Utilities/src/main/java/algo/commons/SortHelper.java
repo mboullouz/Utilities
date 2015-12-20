@@ -26,7 +26,6 @@ public class SortHelper {
             int result = r.nextInt(from);
             if (!list.contains(result)) {
                 list.add(result);
-                System.out.print(" "+result);
             }
         }
 

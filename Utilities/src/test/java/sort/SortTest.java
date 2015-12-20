@@ -20,12 +20,11 @@ public class SortTest {
 
     SortHelper helper = new SortHelper();
     Sort sort = new Sort();
-    int sizeOfArrayToSort = 200;
+    int sizeOfArrayToSort = 100;
     int[] toSort;
     int[] expecteds;
 
     public SortTest() {
-        toSort= helper.generateRandom(sizeOfArrayToSort);
         expecteds = getExpectedArray();
     }
 
@@ -39,6 +38,7 @@ public class SortTest {
 
     @Before
     public void setUp() throws Exception {
+        toSort= helper.generateRandom(sizeOfArrayToSort);
     }
 
     @Test
