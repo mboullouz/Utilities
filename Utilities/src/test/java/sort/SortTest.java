@@ -6,6 +6,7 @@
 package sort;
 
 import algo.commons.Sort;
+import algo.commons.SortHelper;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,6 +23,7 @@ public class SortTest {
     int[] expecteds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
     int[] toSort = {14, 15, 4, 2, 1, 3, 11, 13, 10, 12, 7, 6, 8, 5, 9};
     Sort sort = new Sort();
+    SortHelper helper = new SortHelper();
 
     @Before
     public void setUp() throws Exception {
@@ -32,7 +34,7 @@ public class SortTest {
         int[] a = {1, 2, 3};
         int[] b = {4, 5, 6};
         int[] ex = {1, 2, 3, 4, 5, 6};
-        assertArrayEquals(ex, sort.merge(a, b));
+        assertArrayEquals(ex, helper.merge(a, b));
     }
 
     @Test
@@ -41,7 +43,7 @@ public class SortTest {
         int[] b = {4, 5, 6};
         int[] c = {7, 8, 9};
         int[] ex = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        assertArrayEquals(ex, sort.merge(a, b, c));
+        assertArrayEquals(ex, helper.merge(a, b, c));
     }
 
     @Test
