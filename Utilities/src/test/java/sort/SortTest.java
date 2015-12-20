@@ -7,6 +7,7 @@ package sort;
 
 import algo.commons.Sort;
 import algo.commons.SortHelper;
+import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -17,13 +18,24 @@ import static org.junit.Assert.*;
  */
 public class SortTest {
 
+    SortHelper helper = new SortHelper();
+    Sort sort = new Sort();
+    int sizeOfArrayToSort = 200;
+    int[] toSort;
+    int[] expecteds;
+
     public SortTest() {
+        toSort= helper.generateRandom(sizeOfArrayToSort);
+        expecteds = getExpectedArray();
     }
 
-    int[] expecteds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-    int[] toSort = {14, 15, 4, 2, 1, 3, 11, 13, 10, 12, 7, 6, 8, 5, 9};
-    Sort sort = new Sort();
-    SortHelper helper = new SortHelper();
+    private int[] getExpectedArray() {
+        int[] newArr = new int[sizeOfArrayToSort];
+        for (int i = 0; i < sizeOfArrayToSort; i++) {
+            newArr[i] = i;
+        }
+        return newArr;
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -61,4 +73,32 @@ public class SortTest {
     public void testMergeSort() {
         assertArrayEquals(expecteds, sort.mergeSort(toSort));
     }
+
+    @Test
+    public void testMergeSortStack() {
+        assertArrayEquals(expecteds, sort.mergeSortStack(toSort));
+    }
+
+    @Test
+    public void testRunningTimeForMergeSortInfNLogN() {
+        int n = expecteds.length;
+        int nLogN = (int) (n * Math.log(n));
+        sort.mergeSort(toSort);
+        assertTrue(helper.bigIsSupToSmall(nLogN, sort.getRunningtime()));
+
+    }
+
+    @Test
+    public void testRunningTimeForSortByStackIsInfTo2N() {
+        int n = 2 * expecteds.length + 5;
+        sort.mergeSortStack(toSort);
+        assertTrue(helper.bigIsSupToSmall(n, sort.getRunningtime()));
+
+    }
+
+    @Test
+    public void TestGenerateRandomHaveSameSize() {
+        assertEquals(200, helper.generateRandom(200).length);
+    }
+
 }

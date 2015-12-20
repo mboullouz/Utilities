@@ -5,16 +5,50 @@
  */
 package algo.commons;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  *
  * @author mohamed
  */
 public class SortHelper {
-    
+
+    public boolean bigIsSupToSmall(int big, int small) {
+        return big >= small;
+    }
+
+    public int[] generateRandom(int from) {
+        List<Integer> list = new ArrayList<>();
+        Random r = new Random();
+        while (list.size() < from) {
+            int result = r.nextInt(from);
+            if (!list.contains(result)) {
+                list.add(result);
+                System.out.print(" "+result);
+            }
+        }
+
+        return listToArray(list);
+    }
+
     public void exchange(int i, int k, int[] toSort) {
         int temp = toSort[i];
         toSort[i] = toSort[k];
         toSort[k] = temp;
+    }
+
+    public int[] listToArray(List<Integer> list) {
+        int j = 0;
+        int[] sorted = new int[list.size()];
+        for (Integer v : list) {
+            if (v != null) {
+                sorted[j] = v;
+                j++;
+            }
+        }
+        return sorted;
     }
 
     public int[] getSuppTo(int suppTo, int[] fromArr) {
@@ -94,5 +128,5 @@ public class SortHelper {
         }
         return res;
     }
-    
+
 }
