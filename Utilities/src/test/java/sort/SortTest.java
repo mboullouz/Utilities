@@ -7,7 +7,6 @@ package sort;
 
 import algo.commons.Sort;
 import algo.commons.SortHelper;
-import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -20,25 +19,20 @@ public class SortTest {
 
     SortHelper helper = new SortHelper();
     Sort sort = new Sort();
-    int sizeOfArrayToSort = 100;
-    int[] toSort;
-    int[] expecteds;
+    int sizeOfArrayToSort = 10;
+    int[] toSort = new int[sizeOfArrayToSort];
+    int[] expecteds=new int[sizeOfArrayToSort];
 
     public SortTest() {
-        expecteds = getExpectedArray();
+         
     }
-
-    private int[] getExpectedArray() {
-        int[] newArr = new int[sizeOfArrayToSort];
-        for (int i = 0; i < sizeOfArrayToSort; i++) {
-            newArr[i] = i;
-        }
-        return newArr;
-    }
-
+     
     @Before
     public void setUp() throws Exception {
         toSort= helper.generateRandom(sizeOfArrayToSort);
+        int[] cp =   new int[sizeOfArrayToSort];
+        System.arraycopy(toSort, 0, cp,0, sizeOfArrayToSort);
+        expecteds = sort.bubbleSort(cp);
     }
 
     @Test
@@ -73,13 +67,9 @@ public class SortTest {
     public void testMergeSort() {
         assertArrayEquals(expecteds, sort.mergeSort(toSort));
     }
+ 
 
-    @Test
-    public void testMergeSortStack() {
-        assertArrayEquals(expecteds, sort.mergeSortStack(toSort));
-    }
-
-    @Test
+    //@Test
     public void testRunningTimeForMergeSortInfNLogN() {
         int n = expecteds.length;
         int nLogN = (int) (n * Math.log(n));
@@ -87,18 +77,9 @@ public class SortTest {
         assertTrue(helper.bigIsSupToSmall(nLogN, sort.getRunningtime()));
 
     }
-
-    @Test
-    public void testRunningTimeForSortByStackIsInfTo2N() {
-        int n = 2 * expecteds.length + 5;
-        sort.mergeSortStack(toSort);
-        assertTrue(helper.bigIsSupToSmall(n, sort.getRunningtime()));
-
-    }
-
     @Test
     public void TestGenerateRandomHaveSameSize() {
-        assertEquals(200, helper.generateRandom(200).length);
+        assertEquals(10, helper.generateRandom(10).length);
     }
 
 }

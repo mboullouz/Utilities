@@ -1,5 +1,6 @@
 package algo.commons;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -7,8 +8,11 @@ import java.util.Stack;
 public class Sort {
 
     SortHelper helper = new SortHelper();
-    int runningTime=1;
-    public int getRunningtime(){return runningTime;}
+    int runningTime = 1;
+
+    public int getRunningtime() {
+        return runningTime;
+    }
 
     /**
      * Utilisation des deux boucles Tri n²
@@ -34,11 +38,11 @@ public class Sort {
     /**
      * L'idée: choix d'un pivot et ordoner les éléments par rapport au pivot à
      * droite les élément supérieur à gauche inférieurs Base case: retourner le
-     * tableau initial si le tableau contient 1 élément Positionner deux pinteurs
-     * start et end dans le tableau: Tant que le start n'est pas supérieur au
-     * dernier incrémenter start tant qu'il est inférieur au pivot décrémenter
-     * end tant qu'il est supérieur au pivot echanger les start avec end car
-     * l'un doit etre a gauche du pivot et l'autre à droite, puis
+     * tableau initial si le tableau contient 1 élément Positionner deux
+     * pinteurs start et end dans le tableau: Tant que le start n'est pas
+     * supérieur au dernier incrémenter start tant qu'il est inférieur au pivot
+     * décrémenter end tant qu'il est supérieur au pivot echanger les start avec
+     * end car l'un doit etre a gauche du pivot et l'autre à droite, puis
      * incrémente/décremente pour aller au suivant
      *
      * @param initialFrom
@@ -54,7 +58,7 @@ public class Sort {
         }
         int pivot = toSort[(start + end) / 2];
         while (start <= end) {
-            
+
             while (pivot > toSort[start]) {
                 start++;
             }
@@ -111,46 +115,6 @@ public class Sort {
          * Merger les tableaux resultant de la récursion
          */
         return helper.merge(mergeSort(infs), equals, mergeSort(sups));
-    }
-    Stack stack = new Stack();
-
-    public int[] mergeSortStack(int[] toSort) {
-        stack.push(toSort);
-        return mergeSortStackInternal(toSort.length);
-    }
-    
-    public int[] mergeSortStackInternal(int size) {
-        int[] toSort = null;
-        List<Integer> res = new LinkedList<>();
-        /**
-         * Base case le tableau d'entrée contient un seul élement ou vide
-         */
-        while ((toSort = (int[]) stack.pop()) != null) {
-            if (toSort.length <= 1) {
-                if (toSort.length == 1) {
-                    res.add(toSort[0]);
-                }
-                if (res.size() == size) {
-                    return helper.listToArray(res);
-                }
-            } else {
-                /**
-                 * choix de l'élément, préférable au milieu
-                 */
-                int middleIndex = (toSort.length - 1) / 2;
-                int middleValue = toSort[middleIndex];
-                /**
-                 * Créer 3 tableaux: supérieurs, egaux et inférieurs
-                 */
-                int[] equals = helper.getEquals(middleValue, toSort);
-                int[] sups = helper.getSuppTo(middleValue, toSort);
-                int[] infs = helper.getInfTo(middleValue, toSort);
-                stack.push(sups);
-                stack.push(equals);
-                stack.push(infs);
-            }
-        }
-        return toSort;
-    }
-
+    }   
+ 
 }

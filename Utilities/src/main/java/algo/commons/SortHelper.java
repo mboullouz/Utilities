@@ -24,9 +24,8 @@ public class SortHelper {
         Random r = new Random();
         while (list.size() < from) {
             int result = r.nextInt(from);
-            if (!list.contains(result)) {
-                list.add(result);
-            }
+            list.add(result);
+            System.out.println("L "+result);
         }
 
         return listToArray(list);
@@ -82,6 +81,23 @@ public class SortHelper {
         int k = 0;
         for (int i = 0; i < fromArr.length; i++) {
             if (fromArr[i] < infTo) {
+                arrInfsTo[k] = fromArr[i];
+                k++;
+            }
+        }
+        return arrInfsTo;
+    }
+    public int[] getInfOrEqual(int infOrEqualTo, int[] fromArr) {
+        int size = 0;
+        for (int v : fromArr) {
+            if (v <= infOrEqualTo) {
+                size++;
+            }
+        }
+        int[] arrInfsTo = new int[size];
+        int k = 0;
+        for (int i = 0; i < fromArr.length; i++) {
+            if (fromArr[i] <= infOrEqualTo) {
                 arrInfsTo[k] = fromArr[i];
                 k++;
             }
