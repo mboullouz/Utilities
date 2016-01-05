@@ -23,8 +23,7 @@ public class SortTest {
     int[] toSort = new int[sizeOfArrayToSort];
     int[] expecteds=new int[sizeOfArrayToSort];
 
-    public SortTest() {
-         
+    public SortTest(){         
     }
      
     @Before
@@ -68,18 +67,16 @@ public class SortTest {
         assertArrayEquals(expecteds, sort.mergeSort(toSort));
     }
  
-
-    //@Test
+    @Test
     public void testRunningTimeForMergeSortInfNLogN() {
         int n = expecteds.length;
         int nLogN = (int) (n * Math.log(n));
         sort.mergeSort(toSort);
         assertTrue(helper.bigIsSupToSmall(nLogN, sort.getRunningtime()));
-
     }
+    
     @Test
     public void TestGenerateRandomHaveSameSize() {
         assertEquals(10, helper.generateRandom(10).length);
     }
-
 }
