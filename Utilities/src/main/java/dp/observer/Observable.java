@@ -9,6 +9,7 @@ package dp.observer;
  *
  * @author mohamed
  */
-public interface Observer {
-    void update(Observable observable);
+public interface Observable {
+    void addObserver(Observer o);
+    
 }

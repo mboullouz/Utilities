@@ -12,9 +12,11 @@ import java.util.List;
  *
  * @author mohamed
  */
-public class Button  {
+public class Button implements Observable{
     boolean state=false;
     List<Observer> observersList = new ArrayList<>();
+    
+    @Override
     public void addObserver(Observer O){
          observersList.add(O);
     };
@@ -24,7 +26,8 @@ public class Button  {
     }
     public void  updateAllOberservers(){
         for(Observer observer:observersList){
-            observer.update();
+            observer.update(this);
         }
     }
+ 
 }

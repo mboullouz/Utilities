@@ -12,7 +12,7 @@ package dp.observer;
 public class Light implements Observer{
 
     @Override
-    public void update() {
+    public void update(Observable o) {
         System.out.println("Light off !");
     }
     

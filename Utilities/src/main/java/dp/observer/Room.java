@@ -12,7 +12,7 @@ package dp.observer;
 public class Room implements Observer{
 
     @Override
-    public void update() {
+    public void update(Observable o) {
         System.out.println("Make walls yellow !");
     }
     
