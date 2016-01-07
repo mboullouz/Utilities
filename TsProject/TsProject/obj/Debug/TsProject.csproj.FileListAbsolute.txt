@@ -1,0 +1,6 @@
+C:\gava\Utilities\TsProject\TsProject\bin\TsProject.dll.config
+C:\gava\Utilities\TsProject\TsProject\bin\TsProject.dll
+C:\gava\Utilities\TsProject\TsProject\bin\TsProject.pdb
+C:\gava\Utilities\TsProject\TsProject\obj\Debug\TsProject.csprojResolveAssemblyReference.cache
+C:\gava\Utilities\TsProject\TsProject\obj\Debug\TsProject.dll
+C:\gava\Utilities\TsProject\TsProject\obj\Debug\TsProject.pdb
