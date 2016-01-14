@@ -10,12 +10,14 @@ package dp.basics;
  * @author mboullouz
  */
 public class BasicButton implements IButton {
-    private IElement label;
-    private IElement url;
+    private String label;
+    private String url;
     private String classAttr; 
     
-    public BasicButton(IElement labelButton) {
+    public BasicButton(String labelButton, String url, String classAttr) {
            this.label= labelButton;
+           this.url=url;
+           this.classAttr= classAttr;
     }
     
      
@@ -28,9 +30,9 @@ public class BasicButton implements IButton {
 
     @Override
     public String drawHTML() {
-         return  "<button class='>"
-                 +this.classAttr+"'>"+this.label
-                 + "</button>";
+         return  "<button class='"
+                 +this.classAttr+"'> \n"+this.label+"\n"
+                 + "</button> \n";
     }
  
     

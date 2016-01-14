@@ -14,11 +14,13 @@ import java.util.List;
  */
 public  class Dropdown implements IContainer{
     
-    private IButton topButton;
     private List<IElement> menuItems;
-    public Dropdown(IElement btnLabel){
+    private IButton headBtn;
+    
+    public Dropdown(){
         this.menuItems= new ArrayList<>();
-        this.topButton = new BasicButton(btnLabel);
+        this.headBtn = new BasicButton("Action", "#", "btn");
+       
     }
 
     @Override
@@ -28,8 +30,11 @@ public  class Dropdown implements IContainer{
 
     @Override
     public void drawHTML() {
+        String htmlString = "<div class='container'> \n"+ this.headBtn.drawHTML();//Draw first
         for(IElement element : menuItems){
-            element.drawHTML();
+           htmlString+= element.drawHTML(); //@todo use stringBuffer
         }
+        htmlString+="</div> \n";
+        System.out.println(htmlString); //For test!
     }
 }
