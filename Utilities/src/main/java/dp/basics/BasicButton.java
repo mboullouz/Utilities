@@ -12,12 +12,14 @@ package dp.basics;
 public class BasicButton implements IButton {
     private IElement label;
     private IElement url;
-    private String eClass; 
+    private String classAttr; 
     
     public BasicButton(IElement labelButton) {
            this.label= labelButton;
     }
-
+    
+     
+    
     @Override
     public void addTo(IContainer container) {
          container.add(this);
@@ -26,7 +28,8 @@ public class BasicButton implements IButton {
 
     @Override
     public String drawHTML() {
-         return  "<button class='>"+this.eClass+"'>"+this.label
+         return  "<button class='>"
+                 +this.classAttr+"'>"+this.label
                  + "</button>";
     }
  

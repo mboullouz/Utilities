@@ -11,5 +11,5 @@ package dp.basics;
  */
 public interface IContainer {
     void add(IElement element);
-    void draw();
+    void drawHTML();
 }

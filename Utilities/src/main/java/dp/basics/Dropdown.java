@@ -12,12 +12,24 @@ import java.util.List;
  *
  * @author mboullouz
  */
-public  class Dropdown {
+public  class Dropdown implements IContainer{
     
     private IButton topButton;
-    private List<IMenuItem> menuItems;
+    private List<IElement> menuItems;
     public Dropdown(IElement btnLabel){
         this.menuItems= new ArrayList<>();
         this.topButton = new BasicButton(btnLabel);
+    }
+
+    @Override
+    public void add(IElement element) {
+        menuItems.add(element);
+    }
+
+    @Override
+    public void drawHTML() {
+        for(IElement element : menuItems){
+            element.drawHTML();
+        }
     }
 }
