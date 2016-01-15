@@ -9,6 +9,8 @@ package dp.basics;
  *
  * @author mboullouz
  */
-public interface IButton extends IElement{
-    
+public interface IButton extends IMenuItem{
+    /**
+     * @todo add something related to events and clicks 
+     */
 }

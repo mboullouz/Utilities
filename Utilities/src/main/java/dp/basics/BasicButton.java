@@ -28,12 +28,19 @@ public class BasicButton implements IButton {
     }
 
 
-    @Override
-    public String drawHTML() {
-         return  "<button class='"
-                 +this.classAttr+"'> \n"+this.label+"\n"
+    
+    public String wrapHTML() {
+         return  "<button "
+                 + "class='"+this.classAttr+"' href='"+this.url+"'> \n \t"+this.label+"\n"
                  + "</button> \n";
     }
+
+    @Override
+    public String getHTML() {
+       return "<li>\n\t"+this.wrapHTML()+"</li>\n";
+    }
+
+   
  
     
 }

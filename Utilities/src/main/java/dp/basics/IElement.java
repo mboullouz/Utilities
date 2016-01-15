@@ -11,5 +11,5 @@ package dp.basics;
  */
 public interface IElement {
     void addTo(IContainer container);
-    String drawHTML();
+    String getHTML();
 }

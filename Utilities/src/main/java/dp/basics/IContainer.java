@@ -10,6 +10,6 @@ package dp.basics;
  * @author mboullouz
  */
 public interface IContainer {
-    void add(IElement element);
+    void add(IMenuItem element);
     void drawHTML();
 }

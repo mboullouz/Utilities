@@ -10,5 +10,6 @@ package dp.basics;
  * @author mboullouz
  */
 public interface IMenuItem extends IElement {
-   
+    @Override
+    String getHTML();
 }

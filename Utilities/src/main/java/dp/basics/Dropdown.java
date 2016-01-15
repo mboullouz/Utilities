@@ -5,6 +5,7 @@
  */
 package dp.basics;
 
+import common.FileGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public  class Dropdown implements IContainer{
     
-    private List<IElement> menuItems;
+    private List<IMenuItem> menuItems;
     private IButton headBtn;
     
     public Dropdown(){
@@ -24,17 +25,17 @@ public  class Dropdown implements IContainer{
     }
 
     @Override
-    public void add(IElement element) {
+    public void add(IMenuItem element) {
         menuItems.add(element);
     }
 
     @Override
     public void drawHTML() {
-        String htmlString = "<div class='container'> \n"+ this.headBtn.drawHTML();//Draw first
-        for(IElement element : menuItems){
-           htmlString+= element.drawHTML(); //@todo use stringBuffer
+        String htmlString = "<div class='container'> \n"+ this.headBtn.getHTML();//Draw first
+        for(IMenuItem element : menuItems){
+           htmlString+= element.getHTML(); //@todo use stringBuffer
         }
         htmlString+="</div> \n";
-        System.out.println(htmlString); //For test!
+        FileGenerator.generateHTML(htmlString);
     }
 }
