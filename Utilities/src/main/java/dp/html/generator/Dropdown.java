@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dp.basics;
+package dp.html.generator;
 
 import common.FileGenerator;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 public  class Dropdown implements IContainer{
     
     private List<IMenuItem> menuItems;
-    private IButton headBtn;
+    private Clickable headBtn;
     
     public Dropdown(){
         this.menuItems= new ArrayList<>();
@@ -31,11 +31,17 @@ public  class Dropdown implements IContainer{
 
     @Override
     public void drawHTML() {
-        String htmlString = "<div class='container'> \n"+ this.headBtn.getHTML();//Draw first
+        String headPage="<html><head>Test page!</head><body>\n\t";
+        String htmlString = headPage+
+               "<div class='container'> \n \t<ul>"+ this.headBtn.getElementHTML();//Draw first
         for(IMenuItem element : menuItems){
-           htmlString+= element.getHTML(); //@todo use stringBuffer
+           htmlString+= element.wrapHTML(); //@todo use stringBuffer
         }
-        htmlString+="</div> \n";
+        htmlString+="</ul>\n</div> \n";
+        for(IMenuItem element : menuItems){
+           htmlString+= element.getElementJs(); //@todo use stringBuffer
+        } 
+        htmlString+="\n</body>\n</html>";
         FileGenerator.generateHTML(htmlString);
     }
 }

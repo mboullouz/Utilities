@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 package common;
 
 import java.io.BufferedWriter;
@@ -23,7 +19,7 @@ public class FileGenerator {
             
             String suffix=""+timePoint.getHour()+"_"+timePoint.getMinute();
             
-            File file = new File("C:\\Users\\mohamed\\Desktop\\htmlContent\\page"+suffix+".html");
+            File file = new File("C:\\Users\\mohamed\\Desktop\\htmlContent\\page.html");
             // if file doesnt exists, then create it
             if (!file.exists()) {
                 file.createNewFile();

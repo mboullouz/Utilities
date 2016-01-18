@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dp.basics;
+package dp.html.generator;
 
 /**
  *
@@ -15,8 +15,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IButton btnOne = new BasicButton("Edit", "/a/b", "btn btn-primary");
-        IButton btnTwo = new BasicButton("Delete", "/x/y", "btn btn-danger");
+        IMenuItem btnOne = new BasicButton("Edit", "/a/b", "btn btn-primary");
+        IMenuItem btnTwo = new BasicButton("Delete", "/x/y", "btn btn-danger");
+         btnOne.attachJsFunction("function(){confirm('OK ? or OK? :)');}");
         IContainer dropdown = new Dropdown();
         dropdown.add(btnOne);
         dropdown.add(btnTwo); 

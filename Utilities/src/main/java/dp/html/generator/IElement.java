@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dp.basics;
+package dp.html.generator;
 
 /**
  *
@@ -11,5 +11,5 @@ package dp.basics;
  */
 public interface IElement {
     void addTo(IContainer container);
-    String getHTML();
+    String getElementHTML();
 }
