@@ -1,8 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
+
+
 package dp.html.generator;
 
 import common.FileGenerator;
@@ -21,7 +19,6 @@ public  class Dropdown implements IContainer{
     public Dropdown(){
         this.menuItems= new ArrayList<>();
         this.headBtn = new BasicButton("Action", "#", "btn");
-       
     }
 
     @Override
@@ -39,7 +36,7 @@ public  class Dropdown implements IContainer{
         }
         htmlString+="</ul>\n</div> \n";
         for(IMenuItem element : menuItems){
-           htmlString+= element.getElementJs(); //@todo use stringBuffer
+           htmlString+= element.getElementJs();  
         } 
         htmlString+="\n</body>\n</html>";
         FileGenerator.generateHTML(htmlString);

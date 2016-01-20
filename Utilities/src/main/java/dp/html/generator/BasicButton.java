@@ -19,8 +19,7 @@ public class BasicButton implements IMenuItem {
            this.label= labelButton;
            this.url=url;
            this.classAttr= classAttr;
-           this.elementId=this.toString();
-            
+           this.elementId=this.toString();    
     }
     @Override
     public void addTo(IContainer container) {
@@ -41,8 +40,7 @@ public class BasicButton implements IMenuItem {
     }
 
     @Override
-    public String getElementJs() {
-        
+    public String getElementJs() {       
         return this.jsCode;       
     }
 

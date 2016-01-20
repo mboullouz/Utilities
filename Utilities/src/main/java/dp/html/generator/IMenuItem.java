@@ -10,6 +10,5 @@ package dp.html.generator;
  * @author mboullouz
  */
 public interface IMenuItem extends Clickable{
-    
     String wrapHTML();
 }

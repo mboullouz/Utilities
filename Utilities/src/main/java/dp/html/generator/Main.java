@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         IMenuItem btnOne = new BasicButton("Edit", "/a/b", "btn btn-primary");
         IMenuItem btnTwo = new BasicButton("Delete", "/x/y", "btn btn-danger");
-         btnOne.attachJsFunction("function(){confirm('OK ? or OK? :)');}");
+        btnOne.attachJsFunction("function(){confirm('OK ? or OK? :)');}");
         IContainer dropdown = new Dropdown();
         dropdown.add(btnOne);
         dropdown.add(btnTwo); 
