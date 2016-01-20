@@ -2,7 +2,7 @@
  * Here comes the text of your license
  * Each line should be prefixed with  * 
  */
-package abs.factory;
+package dp.abs.factory;
 
 import java.util.Scanner;
 
@@ -24,6 +24,7 @@ public class MainPage {
 
     public static MenuBuilder generateFromConfig() {
         //read from user input!
+        System.out.println("What to Draw ? #  ");
         Scanner in = new Scanner(System.in);
         menuValue = in.next();
         if (menuValue.equals("TOP")) {

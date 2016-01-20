@@ -2,17 +2,19 @@
  * Here comes the text of your license
  * Each line should be prefixed with  * 
  */
-package abs.factory;
+package dp.abs.factory;
 
 /**
  *
  * @author mohamed
  */
-public class TopMenu implements Menu{
+public class LeftMenu implements Menu{
+    public LeftMenu(){
+        
+    }
 
     @Override
     public void draw() {
-        System.err.println("Draw TopMenu");
+         System.err.println("Draw left Menu");
     }
-    
 }
