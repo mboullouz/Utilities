@@ -1,8 +1,8 @@
 <#if licenseFirst??>
 ${licenseFirst}
 </#if>
-${licensePrefix}Here comes the text of your license
-${licensePrefix}Each line should be prefixed with ${licensePrefix}
+${licensePrefix}Something about the license !
+${licensePrefix}Line one of my license! ${licensePrefix}
 <#if licenseLast??>
 ${licenseLast}
 </#if>
