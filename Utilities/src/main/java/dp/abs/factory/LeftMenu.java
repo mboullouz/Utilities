@@ -1,7 +1,4 @@
-/*
- * Here comes the text of your license
- * Each line should be prefixed with  * 
- */
+
 package dp.abs.factory;
 
 /**
@@ -15,6 +12,6 @@ public class LeftMenu implements Menu{
 
     @Override
     public void draw() {
-         System.err.println("Draw left Menu");
+         System.out.println("Draw left Menu");
     }
 }
