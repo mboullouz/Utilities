@@ -1,8 +1,0 @@
-<#if licenseFirst??>
-${licenseFirst}
-</#if>
-${licensePrefix}Something about the license !
-${licensePrefix}Line one of my license! ${licensePrefix}
-<#if licenseLast??>
-${licenseLast}
-</#if>
