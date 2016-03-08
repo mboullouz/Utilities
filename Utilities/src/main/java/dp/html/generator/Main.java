@@ -20,8 +20,11 @@ public class Main {
         btnOne.attachJsFunction("function(){confirm('OK ? or OK? :)');}");
         IContainer dropdown = new Dropdown();
         dropdown.add(btnOne);
-        dropdown.add(btnTwo); 
-        dropdown.drawHTML();
+        dropdown.add(btnTwo);
+         
+        Page page = new Page();
+        page.addContainer(dropdown);
+        page.toHTML();
     }
-    
+
 }

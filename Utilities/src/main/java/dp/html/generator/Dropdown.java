@@ -3,7 +3,6 @@
 
 package dp.html.generator;
 
-import common.FileGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +27,12 @@ public  class Dropdown implements IContainer{
 
     @Override
     public void drawHTML() {
-        String headPage="<html><head>Test page!</head><body>\n\t";
-        String htmlString = headPage+
-               "<div class='container'> \n \t<ul>"+ this.headBtn.getElementHTML();//Draw first
+        
+    }
+
+    @Override
+    public String toHTML() {
+        String htmlString =  "<div class='container'> \n \t<ul>"+ this.headBtn.getElementHTML();//Draw first
         for(IMenuItem element : menuItems){
            htmlString+= element.wrapHTML(); //@todo use stringBuffer
         }
@@ -38,7 +40,6 @@ public  class Dropdown implements IContainer{
         for(IMenuItem element : menuItems){
            htmlString+= element.getElementJs();  
         } 
-        htmlString+="\n</body>\n</html>";
-        FileGenerator.generateHTML(htmlString);
+        return htmlString;
     }
 }
