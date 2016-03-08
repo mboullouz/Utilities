@@ -5,7 +5,7 @@
  */
 package dp.html.generator;
 
-import common.FileGenerator;
+import common.FileManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +32,6 @@ public class Page {
             htmlString+=c.toHTML();
         }
         htmlString += "\n <b>Page generated!</b>\n </body>\n</html>";
-        FileGenerator.generateHTML(htmlString);
+        FileManager.generateHTML(htmlString);
     }
 }

@@ -1,8 +1,9 @@
- 
 package common;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -11,14 +12,14 @@ import java.time.LocalDateTime;
  *
  * @author mohamed
  */
-public class FileGenerator {
+public class FileManager {
 
     public static void generateHTML(String htmlContent) {
         try {
             LocalDateTime timePoint = LocalDateTime.now();
-            
-            String suffix=""+timePoint.getHour()+"_"+timePoint.getMinute();
-            
+
+            String suffix = "" + timePoint.getHour() + "_" + timePoint.getMinute();
+
             File file = new File("C:\\Users\\mohamed\\Desktop\\htmlContent\\page.html");
             // if file doesnt exists, then create it
             if (!file.exists()) {
@@ -30,7 +31,29 @@ public class FileGenerator {
             bufferWriter.close();
             System.out.println("Done");
         } catch (IOException e) {
-            System.out.println(""+e.getMessage());
+            System.out.println("" + e.getMessage());
+        }
+    }
+    /**
+     * Crédit SO
+     * @param fileName
+     * @return
+     * @throws IOException 
+     */
+    public static String loadFileAsString(String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = br.readLine();
+            }
+            return sb.toString();
+        } finally {
+            br.close();
         }
     }
 }
