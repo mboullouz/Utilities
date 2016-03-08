@@ -25,6 +25,11 @@ public class Main {
         rootContainer.addComponent(simpleContainer);
         
         rootContainer.toHTML();
+        
+        rootContainer.clear();
+        System.out.println("Noting to show \n container is cleared");
+        rootContainer.toHTML();
+       
     }
     
 }
