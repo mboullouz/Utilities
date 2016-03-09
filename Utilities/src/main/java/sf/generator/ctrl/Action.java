@@ -5,18 +5,9 @@
  */
 package sf.generator.ctrl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import common.FileManager;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -44,21 +35,7 @@ public class Action {
         this.arrayReturn.put(key, value);
     }
 
-    public void loadJson() {
-        String json=null;
-        try {
-            json = FileManager.loadFileAsString("some\file");
-            Logger.getLogger(Action.class.getName()).log(Level.INFO, json);
-        } catch (IOException ex) {
-            Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            Object readValue = mapper.readValue(json, Object.class);
-        } catch (IOException ex) {
-            Logger.getLogger(Action.class.getName()).log(Level.SEVERE, "Can't deserialize Json", ex);
-        }
-    }
+    
  
 
 }
