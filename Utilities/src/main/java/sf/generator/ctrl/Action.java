@@ -10,14 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * JSon equivalent
- *{
-   "name":"a",
-   "viewUrl":"u/r/l",
-   "params" : ["p1","p2"],
-   "arrayReturn":{"m1": "a", "m2": "b"}
-   
- }
+ * JSon equivalent { "name":"a", "viewUrl":"u/r/l", "params" : ["p1","p2"],
+ * "arrayReturn":{"m1": "a", "m2": "b"}
+ *
+ * }
+ *
  * @author mohamed
  */
 public class Action {
@@ -36,6 +33,25 @@ public class Action {
 
     public Action() {
 
+    }
+
+    public String toPHP() {
+        String str = "";
+        String strParams = "";
+        for (String p : params) {
+            strParams +=  "$"+p+",";
+        }
+        strParams=strParams.substring(0, strParams.length() - 1);//spprimer derniere virgule
+        String arrResStr = "";
+        for (Map.Entry<String, String> entry : arrayReturn.entrySet()) {
+            arrResStr += "'"+ entry.getKey() + "' =>" + entry.getValue() + ",";
+        }
+         
+        str += "public function "+ name+"( " + strParams + "){ \n"
+                + "$em=$this->getDoctrine()->getManager(); \n"
+                + "return $this->render('" + viewUrl + "', array(" + arrResStr + "));"
+                + "}";
+        return str;
     }
 
     public void addParam(String p) {

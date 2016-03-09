@@ -17,7 +17,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("test: "+FileManager.loadJson());
+        Action actionOne= SfJsonConverter.jsonToAction();
+        System.out.println("test generate PHP \n "+actionOne.toPHP());
+        FileManager.generateHTML(actionOne.toPHP()); 
     }
     
 }

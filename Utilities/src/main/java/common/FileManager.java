@@ -13,14 +13,16 @@ import java.time.LocalDateTime;
  * @author mohamed
  */
 public class FileManager {
-    public static final String JSON_FILE_PATH="C:\\Users\\mohamed\\Desktop\\htmlContent\\data.json";
+    public static final String ACTION_JSON_FILE_PATH="C:\\Users\\mohamed\\Desktop\\htmlContent\\action.json";
+    public static final String CONTROLLER_JSON_FILE_PATH="C:\\Users\\mohamed\\Desktop\\htmlContent\\controller.json";
+
     public static void generateHTML(String htmlContent) {
         try {
             LocalDateTime timePoint = LocalDateTime.now();
 
             String suffix = "" + timePoint.getHour() + "_" + timePoint.getMinute();
 
-            File file = new File("C:\\Users\\mohamed\\Desktop\\htmlContent\\page.html");
+            File file = new File("C:\\Users\\mohamed\\Desktop\\htmlContent\\page.php");
             // if file doesnt exists, then create it
             if (!file.exists()) {
                 file.createNewFile();

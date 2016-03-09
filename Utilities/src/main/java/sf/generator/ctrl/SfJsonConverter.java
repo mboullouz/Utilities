@@ -17,12 +17,12 @@ import java.util.logging.Logger;
  */
 public class SfJsonConverter { 
     
-    private ObjectMapper mapper = new ObjectMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
     
-    public   Action jsonToAction() {
+    public static  Action jsonToAction() {
         String jsonString=null;
         try {
-            jsonString = FileManager.loadFileAsString(FileManager.JSON_FILE_PATH);
+            jsonString = FileManager.loadFileAsString(FileManager.ACTION_JSON_FILE_PATH);
             Logger.getLogger(Action.class.getName()).log(Level.INFO, jsonString);
         } catch (IOException ex) {
             Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
@@ -38,10 +38,10 @@ public class SfJsonConverter {
         return null;
     }
     
-    public   Controller jsonToController() {
+    public static  Controller jsonToController() {
         String jsonString=null;
         try {
-            jsonString = FileManager.loadFileAsString(FileManager.JSON_FILE_PATH);
+            jsonString = FileManager.loadFileAsString(FileManager.CONTROLLER_JSON_FILE_PATH);
             Logger.getLogger(Controller.class.getName()).log(Level.INFO, jsonString);
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
