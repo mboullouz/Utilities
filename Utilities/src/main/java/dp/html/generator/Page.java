@@ -32,6 +32,6 @@ public class Page {
             htmlString+=c.toHTML();
         }
         htmlString += "\n <b>Page generated!</b>\n </body>\n</html>";
-        FileManager.generateHTML(htmlString);
+        FileManager.generateHTML(htmlString,"page.html");
     }
 }

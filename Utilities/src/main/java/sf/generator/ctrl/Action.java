@@ -41,12 +41,12 @@ public class Action {
         strParams=strParams.substring(0, strParams.length() - 1);//spprimer derniere virgule
         String arrResStr = "";
         for (Map.Entry<String, String> entry : arrayReturn.entrySet()) {
-            arrResStr += "'"+ entry.getKey() + "' =>$" + entry.getValue() + ",";
+            arrResStr += "'"+ entry.getKey() + "' =>$" + entry.getValue() + ",\n";
         }
         str += "public function "+ name+"(" + strParams + "){ \n"
                 + "$em=$this->getDoctrine()->getManager(); \n"
-                + "return $this->render('" + viewUrl + "', array(" + arrResStr + "));"
-                + "}";
+                + "return $this->render('" + viewUrl + "', array(" + arrResStr + ")\n);"
+                + "\n}";
         return str;
     }
 

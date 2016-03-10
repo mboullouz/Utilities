@@ -38,8 +38,8 @@ public class Controller {
         for(Action a:actions){
             strActions+=a.toPHP()+"\n\n";
         }
-        result= "<?php \n namespace "+namespace+"; \n"+strUses+"\n"
-                +"public class "+name +" extends Controller { \n"
+        result= "<?php \nnamespace "+namespace+"; \n"+strUses+"\n"
+                +"class "+name +" extends Controller { \n"
                 +strActions+" \n } \n";
         
         return result;

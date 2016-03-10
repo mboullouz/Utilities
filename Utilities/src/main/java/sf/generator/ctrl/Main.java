@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
        Controller controllerOne= SfJsonConverter.jsonToController();
         System.out.println("test generate PHP \n "+controllerOne.toPHP());
-        FileManager.generateHTML(controllerOne.toPHP()); 
+        FileManager.generateHTML(controllerOne.toPHP(),controllerOne.getName()+".php"); 
     }
     
 }
