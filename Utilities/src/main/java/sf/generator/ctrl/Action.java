@@ -1,7 +1,4 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package sf.generator.ctrl;
 
@@ -44,10 +41,9 @@ public class Action {
         strParams=strParams.substring(0, strParams.length() - 1);//spprimer derniere virgule
         String arrResStr = "";
         for (Map.Entry<String, String> entry : arrayReturn.entrySet()) {
-            arrResStr += "'"+ entry.getKey() + "' =>" + entry.getValue() + ",";
+            arrResStr += "'"+ entry.getKey() + "' =>$" + entry.getValue() + ",";
         }
-         
-        str += "public function "+ name+"( " + strParams + "){ \n"
+        str += "public function "+ name+"(" + strParams + "){ \n"
                 + "$em=$this->getDoctrine()->getManager(); \n"
                 + "return $this->render('" + viewUrl + "', array(" + arrResStr + "));"
                 + "}";
