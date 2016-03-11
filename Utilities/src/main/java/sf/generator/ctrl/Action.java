@@ -35,14 +35,10 @@ public class Action {
     public String toPHP() {
         String str = "";
         String strParams = "";
-        for (String p : params) {
-            strParams +=  "$"+p+",";
-        }
+        strParams = params.stream().map(p -> "$"+p+",").reduce(strParams, String::concat);
         strParams=strParams.substring(0, strParams.length() - 1);//spprimer derniere virgule
         String arrResStr = "";
-        for (Map.Entry<String, String> entry : arrayReturn.entrySet()) {
-            arrResStr += "'"+ entry.getKey() + "' =>$" + entry.getValue() + ",\n";
-        }
+        arrResStr = arrayReturn.entrySet().stream().map((entry) -> "'"+ entry.getKey() + "' =>$" + entry.getValue() + ",\n").reduce(arrResStr, String::concat);
         str += "public function "+ name+"(" + strParams + "){ \n"
                 + "$em=$this->getDoctrine()->getManager(); \n"
                 + "return $this->render('" + viewUrl + "', array(" + arrResStr + ")\n);"

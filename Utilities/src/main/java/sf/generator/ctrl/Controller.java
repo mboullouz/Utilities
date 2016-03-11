@@ -31,13 +31,9 @@ public class Controller {
     public String toPHP(){
         String result ;
         String strUses="";
-        for(String s:uses){
-            strUses+=s+";\n";
-        }
+        strUses = uses.stream().map((s) -> s+";\n").reduce(strUses, String::concat);
         String strActions="";
-        for(Action a:actions){
-            strActions+=a.toPHP()+"\n\n";
-        }
+        strActions = actions.stream().map((a) -> a.toPHP()+"\n\n").reduce(strActions, String::concat);
         result= "<?php \nnamespace "+namespace+"; \n"+strUses+"\n"
                 +"class "+name +" extends Controller { \n"
                 +strActions+" \n } \n";
