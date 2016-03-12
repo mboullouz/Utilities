@@ -11,12 +11,12 @@ import java.util.Set;
  * @author mohamed
  */
 public class Controller {
-    private List<String> uses;
+    private List<Use> uses;
     private String name;
     private String namespace;
     private Set<Action> actions;
  
-    public Controller(String name, String namespace,List<String> uses){
+    public Controller(String name, String namespace,List<Use> uses){
         this.name=name.substring(0, 1).toUpperCase() + name.substring(1);//capitalize uper
         this.namespace= namespace;
         this.uses= uses;
@@ -44,11 +44,11 @@ public class Controller {
     public void addAction(Action a){
         actions.add(a);
     }
-     public List<String> getUses() {
+     public List<Use> getUses() {
         return uses;
     }
 
-    public void setUses(List<String> uses) {
+    public void setUses(List<Use> uses) {
         this.uses = uses;
     }
 

@@ -27,7 +27,10 @@ public class Action {
         this.params = params;
         this.arrayReturn = new HashMap<>();
     }
-
+    /**
+     * Un constructeur par défaut est indisponsable pour Jackson afin de 
+     * deserialiser  correctement les objects Json
+     */
     public Action() {
 
     }
