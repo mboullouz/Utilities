@@ -6,8 +6,9 @@
 package sf.generator.ctrl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Iterator;
-import java.util.function.Consumer;
+import java.util.Scanner;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -18,25 +19,35 @@ import org.apache.commons.io.FileUtils;
  */
 public class UseScanner {
 
+    private File fileFound = null;
+
     /**
      *
      * @param use
      */
     public void scan(Use use) {
+
         use.getLines().forEach((String l) -> {
-            searchNamespace(l.toLowerCase());
+            fileFound = searchForClassInFolder(l.toLowerCase());
         });
-     
-    }
-
-    /**
-     * @todo Loop over folders and copy namespace if exits
-     * @param str
-     */
-    private void searchNamespace(String str) {
 
     }
 
+    public String getLineContainingNamespace() {
+        try {
+            Scanner scanner = new Scanner(fileFound);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.toLowerCase().contains("namespace")) {
+                    return line;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            //doSomething
+        }
+        return "";
+    }
+ 
     /**
      * Loop over all directories/and sub direcories for file return first match,
      * null instead
