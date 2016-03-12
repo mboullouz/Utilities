@@ -9,10 +9,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * Only names of classes to use
+ * The UseScanner must be able to find the correct namespace
  * @author mohamed
  */
 public class Use {
+   
     private Set<String> lines = new HashSet<>();
     public Use(){
         
@@ -20,6 +22,14 @@ public class Use {
     
     public void addLine(String line){
         lines.add(line);
+    }
+
+    public Set<String> getLines() {
+        return lines;
+    }
+
+    public void setLines(Set<String> lines) {
+        this.lines = lines;
     }
 
     
