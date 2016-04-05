@@ -32,6 +32,9 @@ public class Sort {
     }
 
     public int[] quickSort(int[] toSort) {
+        /**
+         * Cela peut etre intéressant d'ordonner des parties des tableaux et non seulement en sont intégralité
+         */
         return quickSort(0, toSort.length - 1, toSort);
     }
 
