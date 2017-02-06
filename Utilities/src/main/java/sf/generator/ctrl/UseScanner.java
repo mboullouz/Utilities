@@ -7,10 +7,7 @@ package sf.generator.ctrl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Iterator;
 import java.util.Scanner;
-import org.apache.commons.io.FileUtils;
-
 /**
  * find the namespace by scanning the Use and by looping over directories and
  * files
@@ -56,10 +53,8 @@ public class UseScanner {
      * @return
      */
     public File searchForClassInFolder(String className) {
-        Iterator it = FileUtils.iterateFiles(new File(SfSettings.VENDOR_DIRECTORY_PATH), new String[]{"php,PHP"}, true);
-        while (it.hasNext()) {
-            File file = (File) it.next();
-            if (file.getName().equals(className + ".php")) {//fileExtension
+        for (File file : new File(SfSettings.VENDOR_DIRECTORY_PATH).listFiles()) {
+        	if (file.getName().toUpperCase().contains("PHP")) {
                 return file;
             }
         }

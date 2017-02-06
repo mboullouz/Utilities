@@ -40,5 +40,8 @@ public class InfTree {
 		this.value = value;
 	}
 	
+	public String getName(){
+		return InfTree.class.getSimpleName()+"_"+value;
+	}
 	
 }
