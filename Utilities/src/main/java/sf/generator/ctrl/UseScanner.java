@@ -30,9 +30,11 @@ public class UseScanner {
 
     }
 
-    public String getLineContainingNamespace() {
-        try {
-            Scanner scanner = new Scanner(fileFound);
+    @SuppressWarnings("resource")
+	public String getLineContainingNamespace() {
+    	 Scanner scanner = null;
+    	try {
+           scanner = new Scanner(fileFound);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 if (line.toLowerCase().contains("namespace")) {
@@ -40,7 +42,7 @@ public class UseScanner {
                 }
             }
         } catch (FileNotFoundException e) {
-            //doSomething
+           scanner.close();
         }
         return "";
     }

@@ -7,6 +7,9 @@
  *******************************************************************************/
 package struct.list;
 
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 /**
  * @author mboullouz
  *
@@ -25,7 +28,9 @@ public class BstMain {
 		 *      2     15
 		 *     /\     / \
 		 *    1  20  10  21
- 		 */
+		 *               / \
+		 *              18  50
+ 		 */ 
 		BstNode node0 = new BstNode(7);
 		BstNode node0Left = new BstNode(5);
 
@@ -38,10 +43,15 @@ public class BstMain {
 
 		node0.setLeft(node0Left).setRight(node0Rigt);
 
-		traverse(node0);
+		//traverse(node0);
+		int[] arr= new int[] {9,2,15,1,20,10,21,18,50};
+		traverse(generateFromArray(arr));
 
 	}
 
+	/**
+	 * @param head
+	 */
 	public static void traverse(BstNode head) {
 		if (head == null) {
 			return;
@@ -49,6 +59,26 @@ public class BstMain {
 		System.out.println("\n Current traversed value: " + head.getValue());
 		traverse(head.getLeft());
 		traverse(head.getRight());
+	}
+	
+	public static BstNode generateFromArray(int[] arr){
+		BstNode[] heads= new BstNode[arr.length/2+1];
+		BstNode  prev=null;
+		for(int i =0, k=0; i<arr.length-2; i=i+2,k++){
+			BstNode  head = new BstNode(arr[k])
+					.setLeft(new BstNode(arr[i+1]))
+					.setRight(new BstNode(arr[i+2]));
+			if(prev!=null){
+				if(k%2==0)
+					prev.setLeft(head);
+				else
+					prev.setRight(head);
+			}
+			heads[k]=head;
+			prev=head;
+		}
+
+		return heads[0];
 	}
 
 }
