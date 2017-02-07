@@ -53,6 +53,7 @@ public class SortHelper {
         /**
          * La taille n'est pas connue en avance
          */
+     
         int size = 0; //calculer la taille
         for (int v : fromArr) {
             if (v > suppTo) {

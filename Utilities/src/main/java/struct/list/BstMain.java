@@ -7,46 +7,65 @@
  *******************************************************************************/
 package struct.list;
 
+import java.util.LinkedList;
 import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author mboullouz
  *
  */
 public class BstMain {
-
+     static boolean found=false;
+     static BstNode sNode=null;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		/**
-		 * 		7
-		 * 	  /  \
-		 *   5     9
-		 *       /   \
-		 *      2     15
-		 *     /\     / \
-		 *    1  20  10  21
-		 *               / \
-		 *              18  50
- 		 */ 
+		 * @formatter:off
+		 * 		 9
+		 * 		/  \
+		 *     2    15
+		 *    / \   / \
+		 *   1  20 10 21
+		 *  / \
+		 * 18 50	 
+		 * @formatter:on
+		 */
 		BstNode node0 = new BstNode(7);
 		BstNode node0Left = new BstNode(5);
 
 		BstNode node1Left = new BstNode(2).setLeft(new BstNode(1)).setRight(new BstNode(20));
 		BstNode node1Rigt = new BstNode(15).setLeft(new BstNode(10)).setRight(new BstNode(21));
 
-		BstNode node0Rigt = new BstNode(9)
-				.setLeft(node1Left)
-				.setRight(node1Rigt);
+		BstNode node0Rigt = new BstNode(9).setLeft(node1Left).setRight(node1Rigt);
 
 		node0.setLeft(node0Left).setRight(node0Rigt);
 
-		//traverse(node0);
-		int[] arr= new int[] {9,2,15,1,20,10,21,18,50};
-		traverse(generateFromArray(arr));
+		// traverse(node0);
+		int[] arr = new int[] { 9, 2, 15, 1, 20, 10, 21, 18, 50 };
+		generateFromArray(arr);
+        BstNode head= reConstruct();
+		traverse(head);
+		
+		search(10, head);
+		System.out.println("found? "+found+ " Parent ");
 
+	}
+	
+	public static void search(int v, BstNode head){
+		if(head==null || found){
+			return;
+		}
+ 	System.out.println("Current search v: "+ head.getValue());
+		if(head.getValue()==v){
+			found=true;
+			sNode= head;
+			return;
+		}
+		search(v, head.getLeft());
+		search(v, head.getRight());
 	}
 
 	/**
@@ -60,25 +79,40 @@ public class BstMain {
 		traverse(head.getLeft());
 		traverse(head.getRight());
 	}
-	
-	public static BstNode generateFromArray(int[] arr){
-		BstNode[] heads= new BstNode[arr.length/2+1];
-		BstNode  prev=null;
-		for(int i =0, k=0; i<arr.length-2; i=i+2,k++){
-			BstNode  head = new BstNode(arr[k])
-					.setLeft(new BstNode(arr[i+1]))
-					.setRight(new BstNode(arr[i+2]));
-			if(prev!=null){
-				if(k%2==0)
-					prev.setLeft(head);
-				else
-					prev.setRight(head);
-			}
-			heads[k]=head;
-			prev=head;
-		}
 
-		return heads[0];
+	static Queue<TreeResult> nodes = new LinkedList<>();
+
+	public static BstNode reConstruct() {
+		for (TreeResult rs : nodes) {
+			//System.out.println("current rs: " + rs.getNode().getValue());
+			BstNode element = rs.getNode();
+			Integer position = rs.getPosition();
+			BstNode parent = rs.getParent();
+
+			if (parent != null) {
+				if (position == 0) {
+					parent.setLeft(element);
+				} else {
+					parent.setRight(element);
+				}
+			}
+			else {
+				
+			}
+			 
+		}
+		return nodes.poll().getNode();
+	}
+
+	public static void generateFromArray(int[] arr) {
+		BstNode parent = null;
+		for (int k = 0; k < arr.length; k++) {
+			BstNode head = new BstNode(arr[k]);
+			nodes.add(new TreeResult(head, (k-1) % 2, parent));
+			if (k % 2 == 0)
+				parent = head;
+		}
+		return;
 	}
 
 }
