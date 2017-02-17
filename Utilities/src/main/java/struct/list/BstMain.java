@@ -1,10 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2016 Inova Software S.A. All Rights Reserved.
- *   50 cours de la Republique, 69100 Villeurbanne, FRANCE; 
- *   Phone: +33-4-78-27-95-02; Fax: +33-4-78-68-00-94
- * Contributors:
- *   FrontEnd Team
- *******************************************************************************/
 package struct.list;
 
 import java.util.LinkedList;
