@@ -1,1 +1,1 @@
-Testing quickly some ideas while coding other stuff 
+Testing some ideas while coding other stuff 
