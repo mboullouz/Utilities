@@ -9,28 +9,30 @@ package struct.list;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author mboullouz
  *
  */
 public class BstMain {
-     static boolean found=false;
-     static BstNode sNode=null;
+	static boolean found = false;
+	static BstNode sNode = null;
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		/**
-		 * @formatter:off
-		 * 		 9
-		 * 		/  \
-		 *     2    15
-		 *    / \   / \
-		 *   1  20 10 21
-		 *  / \
-		 * 18 50	 
+		 * @formatter:off 
+		 *            9 
+		 *          /   \ 
+		 *        2      15  
+		 *       / \     / \ 
+		 *      1  20    10 21
+		 *     / \
+		 *    18 50
 		 * @formatter:on
 		 */
 		BstNode node0 = new BstNode(7);
@@ -46,22 +48,33 @@ public class BstMain {
 		// traverse(node0);
 		int[] arr = new int[] { 9, 2, 15, 1, 20, 10, 21, 18, 50 };
 		generateFromArray(arr);
-        BstNode head= reConstruct();
-		traverse(head);
-		
-		search(10, head);
-		System.out.println("found? "+found+ " Parent ");
+		BstNode head = reConstruct();
+		traverseNoRec(head);
+
+		// search(10, head);
+		// System.out.println("found? " + found + " Parent ");
 
 	}
-	
-	public static void search(int v, BstNode head){
-		if(head==null || found){
+
+	public static void traverseNoRec(BstNode head) {
+		BstNode current = head;
+		Stack<BstNode> stack = new Stack<>();
+		stack.push(head);
+		while ((current=stack.pop())!=null) {
+			System.out.println("E:"+current.getValue());
+			stack.push(current.getLeft());
+			current=current.getRight();
+		}
+	}
+
+	public static void search(int v, BstNode head) {
+		if (head == null || found) {
 			return;
 		}
- 	System.out.println("Current search v: "+ head.getValue());
-		if(head.getValue()==v){
-			found=true;
-			sNode= head;
+		System.out.println("Current search v: " + head.getValue());
+		if (head.getValue() == v) {
+			found = true;
+			sNode = head;
 			return;
 		}
 		search(v, head.getLeft());
@@ -84,7 +97,7 @@ public class BstMain {
 
 	public static BstNode reConstruct() {
 		for (TreeResult rs : nodes) {
-			//System.out.println("current rs: " + rs.getNode().getValue());
+			// System.out.println("current rs: " + rs.getNode().getValue());
 			BstNode element = rs.getNode();
 			Integer position = rs.getPosition();
 			BstNode parent = rs.getParent();
@@ -95,11 +108,10 @@ public class BstMain {
 				} else {
 					parent.setRight(element);
 				}
+			} else {
+
 			}
-			else {
-				
-			}
-			 
+
 		}
 		return nodes.poll().getNode();
 	}
@@ -108,7 +120,7 @@ public class BstMain {
 		BstNode parent = null;
 		for (int k = 0; k < arr.length; k++) {
 			BstNode head = new BstNode(arr[k]);
-			nodes.add(new TreeResult(head, (k-1) % 2, parent));
+			nodes.add(new TreeResult(head, (k - 1) % 2, parent));
 			if (k % 2 == 0)
 				parent = head;
 		}
