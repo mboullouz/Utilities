@@ -1,26 +1,38 @@
 package struct.map;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.stream.IntStream;
+
+import algo.commons.SortHelper;
+import struct.list.BstNode;
 
 public class MainMap {
 
 	public static void main(String[] args) {
-		MHashMap map = new MHashMap();
-		int len = 4;
-		String lastKey = "";
-		for (int i = 0; i < len; i++) {
-			String key = RandomStringUtils.randomAlphanumeric(2);
-			String value = key + "_" + i;
-			System.out.println("V: "+ value+ " K: "+ key);
-			map.put(key, value);
-			lastKey = key;
-		}
-		map.printAll();
+		MHashMap<BstNode,BstNode> map = new MHashMap<>();
+		int mapInitSize= MHashMap.initSize;
+		int len =  1000;
+		
+		int[] randInts = new SortHelper().generateRandAndUniq(len);
+		Instant start = Instant.now();
+		IntStream.of(randInts).forEach(i->{
+			String key="x_"+i;
+			map.put(new BstNode(i), new BstNode(i));
+		});
+		 
+		Instant end = Instant.now();
+		System.out.println("\n ---- Duration: "+Duration.between(start, end).getSeconds()+ " seconds"); 
+		//map.printAll();
 		if (map.size() < len) {
 			System.out.println("There is N:" + (len - map.size()) + " Collision!");
 		}
 
-		System.out.println("LastValue: " + map.get(lastKey)+ " for key: "+ lastKey);
+		System.out.println("The map is resized : " + MHashMap.countResize+ " times");
+		
+		if(MHashMap.countResize>=(Math.log(len/2))/Math.log(mapInitSize) && MHashMap.countResize<=((Math.log(len/2))/Math.log(mapInitSize)+1) ){
+			System.out.println("Resize: "+MHashMap.countResize+" € ["+((Math.log(len/2))/Math.log(mapInitSize))+", "+( (Math.log(len/2))/Math.log(mapInitSize)+1)+ "]");
+		}
 	}
 
 }
