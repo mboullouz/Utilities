@@ -30,6 +30,28 @@ public class SortHelper {
 
         return listToArray(list);
     }
+    
+    public int[] generateRandomAndUniq(int size){
+    	int[] res= new int[size];
+    	int c=0;
+    	
+    	Random r = new Random();
+    	while(c<size ){
+    		int randN = r.nextInt();
+    		boolean found=false; 
+    		for(int j= 0; j<size;j++){
+    			if(res[j]==randN){
+    				found =true;
+    				continue;
+    			}
+ 
+    			randN = r.nextInt();
+    		}
+    		 
+    		c++;
+    	}
+    	return res;
+    }
 
     public void exchange(int i, int k, int[] toSort) {
         int temp = toSort[i];
