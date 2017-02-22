@@ -56,7 +56,6 @@ public class OperationHelper {
             current.setNext(previous);  
             previous=current;
             current=head;
-            
         }
         return previous;
     }

@@ -9,25 +9,44 @@ package struct.list;
  *
  * @author mohamed
  */
-public class MyList {
+public class MyList implements Comparable<MyList> {
 
-    int data;
-    MyList next;
+	int data;
+	MyList next;
 
-    public MyList(int i) {
-        this.data = i;
-    }
+	public MyList(int i) {
+		this.data = i;
+	}
 
-    public MyList getNext() {
-        return this.next;
-    }
+	public MyList getNext() {
+		return this.next;
+	}
 
-    public void setNext(MyList myList) {
-        this.next = myList;
-    }
+	public void setNext(MyList myList) {
+		this.next = myList;
+	}
 
-    public int getData() {
-        return this.data;
-    }
+	public int getData() {
+		return this.data;
+	}
+
+	@Override
+	public int compareTo(MyList other) {
+		if (other.getData() > this.data) {
+			return -1;
+		}
+		if (this.data > other.getData()) {
+			return 1;
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		System.out.println("Used eqls");
+		return compareTo((MyList)obj)==0;
+	}
+	
+	
 
 }
