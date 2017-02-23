@@ -32,6 +32,23 @@ public class SortHelper {
 		return listToArray(list);
 	}
 
+  
+    public int[] generateRandomAndUniq(int size){
+    	int[] res= new int[size];
+    	int c=0;
+    	Random r = new Random();
+    	while(c<size ){
+    		int randN = r.nextInt();
+    		for(int j= 0; j<size;j++){
+    			if(res[j]==randN){
+    				continue;
+    			}
+    			randN = r.nextInt();
+    		}
+    		c++;
+    	}
+    	return res;
+    }
 	public int[] generateRandAndUniq(int size) {
 		int[] res = new int[size];
 		Random rand = new Random();
