@@ -6,11 +6,13 @@
 package algo.commons;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -49,30 +51,72 @@ public class SortHelper {
     	}
     	return res;
     }
-	public int[] generateRandAndUniq(int size) {
-		int[] res = new int[size];
+    
+    /**
+     * very fast random unique array generator
+     * @param desiredSize
+     * @return
+     */
+    public final int[] generateRandAndUniqRGL(int desiredSize) {
+        int[] set = IntStream.range(0,  desiredSize * 3).toArray();
+        int index = set.length;
+        // Fisher-Yates.
+        Random rand = new Random();
+        while (index > 1) {
+            final int pos = rand.nextInt(index--);
+            final int tmp = set[pos];
+            set[pos] = set[index];
+            set[index] = tmp;
+        }        
+        return Arrays.copyOf(set, desiredSize);
+    }
+    
+    /**
+     * Generate an array of random & unique values in the interval [0,desiredSize*3]
+     * To use only for small arrays with size in [1,50k]
+     * for an array of 1k time: 0.01s
+     * for an array of 10k time: 0.3s
+     * for an array of 50k time: 8s 
+     * @param desiredSize
+     * @return
+     */
+	public int[] generateRandAndUniq(int desiredSize) {
+		int[] arrayResult = new int[desiredSize];
 		Random rand = new Random();
-		res[0]= rand.nextInt(size);
-		int k = 0;
-		int max= size*5;
-		while (k < size && max>0) {
-			int r = rand.nextInt(size*5);
-			int[] resTemp= new int[k+2];
-			System.arraycopy(res, 0, resTemp,0, k);
-			resTemp[k+1]=r;
-			if(fasterContainDuplicat(resTemp)){
-				max--; //protect against overflow!
-			}
-			else {
-				res[k]=r;
-				k++;
+		arrayResult[0]= rand.nextInt(desiredSize);
+		int counter = 0;
+		while (counter < desiredSize) {
+			int randValue = rand.nextInt(desiredSize*3);/* a larger interval! */
+			int[] tempArray= new int[counter+2];
+			System.arraycopy(arrayResult, 0, tempArray,0, counter);
+			tempArray[counter+1]=randValue;
+			if(!checkDuplicate(tempArray)){
+				arrayResult[counter]=randValue;
+				counter++;
 			}
 		}
-		 
-		System.out.println("Attention! rand already consumed: "+(size*5-max));
-		 
-
-		return res;
+		return arrayResult;
+	}
+	
+	public boolean checkDuplicate(int[] arr) {
+		boolean[] bitmap = new boolean[maxValueInArray(arr)+1]; 
+		for (int v : arr) {
+			if (!bitmap[v]) {
+				bitmap[v] = true;
+			} else {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int maxValueInArray(int[] arr){
+		int max=-1;
+		for(int v:arr){
+			if(v>max)
+				max=v;
+		}
+		return max;
 	}
 
 	public void exchange(int i, int k, int[] toSort) {
@@ -235,30 +279,6 @@ public class SortHelper {
 		return vs.size() != arr.length;
 	}
 
-	public boolean fasterContainDuplicat(int[] arr) {
-		/**
-		 *  We could just put the max value: like Math.pow(2,30)
-		 *  But its better to 
-		 */
-		boolean[] bitmap = new boolean[maxValueInArray(arr)+2]; 
-		for (int v : arr) {
-			if (!bitmap[v]) {
-				bitmap[v] = true;
-			} else {
-				return true;
-			}
-		}
-
-		return false;
-	}
 	
-	public int maxValueInArray(int[] arr){
-		int max=-1;
-		for(int v:arr){
-			if(v>max)
-				max=v;
-		}
-		return max;
-	}
 
 }

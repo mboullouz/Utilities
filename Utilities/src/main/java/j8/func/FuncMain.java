@@ -10,7 +10,7 @@ public class FuncMain {
 	public static void main(String[] args) {
 		
 		System.out.println("Starts...");
-		List<String> list = Arrays.asList("lyon", "paris", "grenoble", "nantes","lille");
+		List<String> list = Arrays.asList("Lyon", "paris", "grenoble", "nantes","lille");
 		list.stream()
 			.map(String::toUpperCase)
 			.sorted(StringsAlgo::compare)
