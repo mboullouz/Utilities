@@ -49,7 +49,6 @@ public class OperationHelper {
     public MyList invertList(MyList head) {
         MyList current = head;
         MyList previous = null;
-
         while (head != null) {
             head = head.getNext();
             current.setNext(previous);
