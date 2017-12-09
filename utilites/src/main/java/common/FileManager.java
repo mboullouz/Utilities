@@ -1,38 +1,19 @@
 package common;
 
-import java.io.*;
-import java.time.LocalDateTime;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author mohamed
  */
 public class FileManager {
-    public static final String ACTION_JSON_FILE_PATH = "C:\\Users\\mohamed\\Desktop\\htmlContent\\action.json";
-    public static final String CONTROLLER_JSON_FILE_PATH = "C:\\Users\\mohamed\\Desktop\\htmlContent\\controller.json";
 
-    public static void generateHTML(String htmlContent, String generatedFileName) {
-        try {
-            LocalDateTime timePoint = LocalDateTime.now();
-
-            String suffix = "" + timePoint.getHour() + "_" + timePoint.getMinute();
-
-            File file = new File("C:\\Users\\mohamed\\Desktop\\htmlContent\\" + generatedFileName);
-            // if file doesnt exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
-            bufferWriter.write(htmlContent);
-            bufferWriter.close();
-            System.out.println("Done");
-        } catch (IOException e) {
-            System.out.println("" + e.getMessage());
-        }
-    }
 
     /**
-     * Crédit SO
      *
      * @param fileName
      * @return
@@ -49,6 +30,45 @@ public class FileManager {
             }
             return sb.toString();
         }
+    }
+
+    /**
+     * Load file relative to class
+     * No line separator is appended!
+     * @param clazz to use a resource
+     * @param fileName to load
+     * @return a list of lines
+     */
+    public static List<String> fileToLines(Class<?> clazz, String fileName) {
+        List<String> lines;
+        try (Scanner scanner = new Scanner(clazz.getResourceAsStream("/" + fileName)).useDelimiter("\\A");) {
+            lines = new ArrayList<>();
+            while (scanner.hasNext()) {
+                lines.add(scanner.next());
+            }
+        }
+        return lines;
+    }
+
+    /**
+     *
+     * @param clazz resource class
+     * @param fileName file
+     * @return the file as a string including line seprator char
+     */
+    public static String fileToString(Class<?> clazz, String fileName) {
+        final StringBuilder sb = new StringBuilder();
+        final List<String> lines = fileToLines(clazz, fileName);
+        int i = 0;
+        for (String s : lines) {
+            sb.append(s);
+            /* Skip adding 'new-line symbol' to last line */
+            if (i < lines.size() - 1) {
+                sb.append("\r");
+            }
+            i++;
+        }
+        return sb.toString();
     }
 
 
