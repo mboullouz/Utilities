@@ -1,6 +1,7 @@
 package matrix;
 
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class MatrixUtils {
 
@@ -26,27 +27,18 @@ public class MatrixUtils {
         return res;
     }
 
-    public static Object linesToRow(String[] in, Function<String, Object> compatibleParser) {
-        final Object[][] res = new Object[in.length][3];
-        int i = 0;
-        for (String s : in) {
-            res[i] = lineToRow(s,compatibleParser);
-            i++;
-        }
-        return res;
-    }
-
-
-
     /**
      * TODO find a way to use something like E[][]
      */
-    public static Double[][] lineToRow(String[] ins) {
+    public static Double[][] lineToRow(String[] ins, int cols) {
         int i = 0;
-        Double[][] res = new Double[ins.length][3];
+        Double[][] res = new Double[ins.length][cols];
         for (String ss : ins) {
             int j = 0;
             final String[] els = ss.split(" +");
+            if (els.length > cols) {
+                throw new ArithmeticException("String lines should be consistant with cols! found cols in sting: " + els.length + " but provided cols: " + cols);
+            }
             for (String s : els) {
                 res[i][j] = Double.valueOf(s);
                 j++;
@@ -56,6 +48,42 @@ public class MatrixUtils {
         return res;
     }
 
+    public static String plotMartix(Double[][] matrix) {
+        final StringBuilder sb = new StringBuilder();
+        Stream.of(matrix).forEach(v -> {
+                    sb.append("| ");
+                    Stream.of(v).forEach(k -> sb.append(k).append(" "));
+                    sb.append("|\n");
+                }
+        );
+        return sb.toString();
+    }
+
+    public static Double[] diagonal(Double[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return new Double[]{};
+        }
+        Double[] diagList = new Double[matrix.length];
+        int k = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            diagList[k] = (matrix[i][i]);
+            k++;
+        }
+        return diagList;
+    }
+
+    public static Double[] opposedDiagonal(Double[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return new Double[]{};
+        }
+        Double[] diagList = new Double[matrix.length];
+        int k = 0;
+        for (int i = matrix.length - 1; i >= 0; i--) {
+            diagList[k] = (matrix[matrix.length - 1 - i][i]);
+            k++;
+        }
+        return diagList;
+    }
 
 
 }
