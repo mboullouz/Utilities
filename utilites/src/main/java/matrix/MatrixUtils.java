@@ -85,5 +85,21 @@ public class MatrixUtils {
         return diagList;
     }
 
+    public static Double det(Double[][] matrix) {
+        return null;
+    }
+
+    public static Double[][] optimizeForZeros(Double[][] matrix) {
+        return null;
+    }
+
+    public static Double[][] lineMultiuplyByX(Double[][] matrix, int row, int multiply) {
+        return null;
+    }
+
+    public static Double[][] colMultiuplyByX(Double[][] matrix, int col, int multiply) {
+        return null;
+    }
+
 
 }
