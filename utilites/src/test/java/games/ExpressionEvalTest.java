@@ -10,14 +10,22 @@ public class ExpressionEvalTest {
 
     @Test
     public void stringTo2Stacks() {
-        String in = "1 + 2";
+        String in = "(1 + 2)+(2+5)";
         Stack<Integer> exp = new Stack<>();
         exp.push(1);
         exp.push(2);
-        Assert.assertEquals(exp, ExpressionEvaluator.numbers(in));
+       // Assert.assertEquals(exp, ExpressionEvaluator.numbers(in));
 
         Stack<String> expSymbols = new Stack<>();
+        expSymbols.push("(");
         expSymbols.push("+");
-        Assert.assertEquals(expSymbols, ExpressionEvaluator.operators(in, ExpressionEvaluator.operatorPredicate()));
+        expSymbols.push(")");
+       // Assert.assertEquals(expSymbols, ExpressionEvaluator.operators(in));
+
+        Assert.assertEquals(new Integer(10), ExpressionEvaluator.doMath(
+                ExpressionEvaluator.numbers(in),
+                ExpressionEvaluator.operators(in)
+        ));
+
     }
 }
