@@ -10,7 +10,7 @@ public class ExpressionEvalTest {
 
     @Test
     public void stringTo2Stacks() {
-        String in = "(1+2+3+4)*(4+6)";
+        String in = "(1+2+3+4)*(10+0)";
         Stack<Integer> exp = new Stack<>();
         exp.push(1);
         exp.push(2);
@@ -26,31 +26,35 @@ public class ExpressionEvalTest {
                 ExpressionEvaluator.numbers(in),
                 ExpressionEvaluator.operators(in)
         )); */
-        Assert.assertEquals(new ExpressionEvaluator.SResult(
+        /*Assert.assertEquals(new ExpressionEvaluator.SResult(
                 ExpressionEvaluator.numbers("(1+2+3+4)*(4+6)"),
                 ExpressionEvaluator.operators(in)
         ), new ExpressionEvaluator.SResult(
                 ExpressionEvaluator.numbers(in),
                 ExpressionEvaluator.operators(in)
-        ));
+        ));*/
         ExpressionEvaluator.SResult p1 = ExpressionEvaluator.doMath(
-                ExpressionEvaluator.numbers("(1+2+3+4)*(4+6)"),
+                ExpressionEvaluator.numbers(in),
                 ExpressionEvaluator.operators(in)
         );
-        Assert.assertEquals(p1, new ExpressionEvaluator.SResult(
-                ExpressionEvaluator.numbers("10"),
-                ExpressionEvaluator.operators("*")
-        ));
+//        Assert.assertEquals(p1, new ExpressionEvaluator.SResult(
+//                ExpressionEvaluator.numbers("10"),
+//                ExpressionEvaluator.operators("*")
+//        ));
 
         ExpressionEvaluator.SResult p2 = ExpressionEvaluator.doMath(
                 p1.otherRs,
                 p1.otherOps
         );
 
-        Assert.assertEquals(p2, new ExpressionEvaluator.SResult(
-                ExpressionEvaluator.numbers("10"),
-                ExpressionEvaluator.operators("")
-        ));
+//        Assert.assertEquals(p2, new ExpressionEvaluator.SResult(
+//                ExpressionEvaluator.numbers("10"),
+//                ExpressionEvaluator.operators("")
+//        ));
+        ExpressionEvaluator.SResult merge = p1.merge(p2);
+        Assert.assertEquals(new Integer(100), ExpressionEvaluator.simple(
+                merge.rs,merge.ops
+        ) );
 
     }
 }

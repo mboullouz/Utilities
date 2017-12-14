@@ -46,7 +46,7 @@ public class ExpressionEvaluator {
                 }
                 if (f) {
                     rs.push(numbers.pop());
-                    if(operators.size()>0)
+                    if (operators.size() > 0)
                         ops.push(operators.pop());
                     return new SResult(rs, ops).other(numbers, operators);
                 }
@@ -56,6 +56,19 @@ public class ExpressionEvaluator {
         return null;
     }
 
+    public static Integer simple(Stack<Integer> numbers, Stack<String> operators) {
+        while (numbers.size() > 1) {
+            Integer r = numbers.pop();
+            Integer l = numbers.pop();
+            String op = operators.pop();
+            if (op.contains("*")) {
+                numbers.push(l * r);
+            } else {
+                numbers.push(l + r);
+            }
+        }
+        return numbers.pop();
+    }
 
     public static class SResult {
         public Stack<Integer> rs = new Stack<>();
@@ -69,13 +82,13 @@ public class ExpressionEvaluator {
             this.ops = ops;
         }
 
-        SResult other(Stack<Integer> rs, Stack<String> ops) {
+        public SResult other(Stack<Integer> rs, Stack<String> ops) {
             this.otherRs = rs;
             this.otherOps = ops;
             return this;
         }
 
-        SResult merge(SResult other){
+        public SResult merge(SResult other) {
             rs.addAll(other.rs);
             ops.addAll(other.ops);
             return this;
