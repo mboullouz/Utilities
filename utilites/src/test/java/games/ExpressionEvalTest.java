@@ -6,7 +6,14 @@ import org.junit.Test;
 
 import java.util.Stack;
 
+import static game.card.ExpressionEvaluator.simplePostfixEval;
+
 public class ExpressionEvalTest {
+
+    @Test
+    public void prnTest() {
+        Assert.assertEquals(new Integer(60), simplePostfixEval("1 2 + 4 6 + * 10 2 * + 10 +"));
+    }
 
     @Test
     public void stringTo2Stacks() {
@@ -21,40 +28,19 @@ public class ExpressionEvalTest {
         expSymbols.push("+");
         expSymbols.push(")");
         // Assert.assertEquals(expSymbols, ExpressionEvaluator.operators(in));
-
-       /* Assert.assertEquals(new Integer(20), ExpressionEvaluator.doMath(
-                ExpressionEvaluator.numbers(in),
-                ExpressionEvaluator.operators(in)
-        )); */
-        /*Assert.assertEquals(new ExpressionEvaluator.SResult(
-                ExpressionEvaluator.numbers("(1+2+3+4)*(4+6)"),
-                ExpressionEvaluator.operators(in)
-        ), new ExpressionEvaluator.SResult(
-                ExpressionEvaluator.numbers(in),
-                ExpressionEvaluator.operators(in)
-        ));*/
         ExpressionEvaluator.SResult p1 = ExpressionEvaluator.doMath(
                 ExpressionEvaluator.numbers(in),
                 ExpressionEvaluator.operators(in)
         );
-//        Assert.assertEquals(p1, new ExpressionEvaluator.SResult(
-//                ExpressionEvaluator.numbers("10"),
-//                ExpressionEvaluator.operators("*")
-//        ));
 
         ExpressionEvaluator.SResult p2 = ExpressionEvaluator.doMath(
                 p1.otherRs,
                 p1.otherOps
         );
-
-//        Assert.assertEquals(p2, new ExpressionEvaluator.SResult(
-//                ExpressionEvaluator.numbers("10"),
-//                ExpressionEvaluator.operators("")
-//        ));
         ExpressionEvaluator.SResult merge = p1.merge(p2);
         Assert.assertEquals(new Integer(100), ExpressionEvaluator.simple(
-                merge.rs,merge.ops
-        ) );
+                merge.rs, merge.ops
+        ));
 
     }
 }

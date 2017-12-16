@@ -172,4 +172,39 @@ public class ExpressionEvaluator {
     public static boolean isOperator(String in) {
         return !(StringUtils.isAlpha(in) || StringUtils.isNumeric(in));
     }
+
+    public static Integer simplePostfixEval(String expr) {
+        String[] els = expr.split(" ");
+        Stack<String> stringStack = new Stack<>();
+        for (int i = els.length - 1; i >= 0; i--) {
+            stringStack.push(els[i]);
+        }
+        return simplePostfixEval(stringStack);
+    }
+
+    public static Integer simplePostfixEval(Stack<String> elms) {
+        while (elms.size() > 2) {
+            if (elms.size() >= 1) {
+                String v1 = elms.pop();
+                String v2 = elms.pop();
+                String op = elms.pop();
+                if (!isOperator(op)) {
+                    String wt = v1;
+                    v1 = v2;
+                    v2 = op;
+                    op = elms.pop();
+                    elms.push(wt);
+                }
+                int res = 0;
+                if (op.contains("+")) {
+                    res = Integer.parseInt(v1) + Integer.parseInt(v2);
+                }
+                if (op.contains("*")) {
+                    res = Integer.parseInt(v1) * Integer.parseInt(v2);
+                }
+                elms.push(res + "");
+            }
+        }
+        return Integer.parseInt(elms.pop());
+    }
 }
